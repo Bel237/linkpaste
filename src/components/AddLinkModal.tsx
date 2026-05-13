@@ -125,35 +125,35 @@ export default function AddLinkModal({
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative bg-white dark:bg-gray-900 rounded-t-2xl sm:rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl">
-        <div className="sticky top-0 bg-white dark:bg-gray-900 rounded-t-2xl border-b border-gray-100 dark:border-gray-800 px-6 py-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <div className="relative bg-white dark:bg-gray-900 rounded-t-2xl sm:rounded-2xl w-full max-w-lg max-h-[80vh] overflow-y-auto shadow-2xl">
+        <div className="sticky top-0 bg-white dark:bg-gray-900 rounded-t-2xl border-b border-gray-100 dark:border-gray-800 px-4 py-3 flex items-center justify-between z-10">
+          <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">
             {editLink ? "Modifier le lien" : "Sauvegarder un lien"}
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+            className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
           >
-            <X className="w-5 h-5 text-gray-500" />
+            <X className="w-4 h-4 text-gray-500" />
           </button>
         </div>
 
-        <div className="p-6 space-y-5">
+        <div className="px-4 py-3 space-y-3">
           {/* URL */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
               Lien *
             </label>
             <div className="flex gap-2">
               <div className="relative flex-1">
-                <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
                 <input
                   ref={inputRef}
                   type="url"
                   value={url}
                   onChange={(e) => handleUrlChange(e.target.value)}
                   placeholder="https://..."
-                  className={`w-full pl-10 pr-4 py-3 rounded-xl border ${
+                  className={`w-full pl-9 pr-3 py-2.5 rounded-xl border ${
                     urlError
                       ? "border-red-300 focus:ring-red-500"
                       : "border-gray-200 dark:border-gray-700 focus:ring-indigo-500"
@@ -162,57 +162,57 @@ export default function AddLinkModal({
               </div>
               <button
                 onClick={handlePaste}
-                className="px-4 py-3 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl text-sm font-medium hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors whitespace-nowrap"
+                className="px-3 py-2.5 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl text-xs font-medium hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors whitespace-nowrap"
               >
                 Coller
               </button>
             </div>
             {urlError && (
-              <p className="text-red-500 text-xs mt-1.5">{urlError}</p>
+              <p className="text-red-500 text-xs mt-1">{urlError}</p>
             )}
           </div>
 
-          {/* Title */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Titre
-            </label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Ex: Recette de cookies, Tuto React..."
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400"
-            />
-          </div>
-
-          {/* Description */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Note rapide
-            </label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Pourquoi ce lien est intéressant..."
-              rows={2}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-sm resize-none text-gray-900 dark:text-gray-100 placeholder-gray-400"
-            />
+          {/* Title + Description side by side on larger screens, stacked on mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Titre
+              </label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Recette, Tuto..."
+                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Note rapide
+              </label>
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Pourquoi ce lien..."
+                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400"
+              />
+            </div>
           </div>
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
               Catégorie
             </label>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {categories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setCategory(cat.id)}
-                  className={`px-3.5 py-2 rounded-full text-xs font-medium transition-all ${
+                  className={`px-2.5 py-1.5 rounded-full text-[11px] font-medium transition-all ${
                     category === cat.id
-                      ? "text-white shadow-md scale-105"
+                      ? "text-white shadow-sm"
                       : "bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`}
                   style={
@@ -230,15 +230,15 @@ export default function AddLinkModal({
           {/* Collection */}
           {collections.length > 0 && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Collection
               </label>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 <button
                   onClick={() => setCollectionId("")}
-                  className={`px-3.5 py-2 rounded-full text-xs font-medium transition-all ${
+                  className={`px-2.5 py-1.5 rounded-full text-[11px] font-medium transition-all ${
                     collectionId === ""
-                      ? "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 shadow-md"
+                      ? "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 shadow-sm"
                       : "bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`}
                 >
@@ -248,9 +248,9 @@ export default function AddLinkModal({
                   <button
                     key={col.id}
                     onClick={() => setCollectionId(col.id)}
-                    className={`px-3.5 py-2 rounded-full text-xs font-medium transition-all ${
+                    className={`px-2.5 py-1.5 rounded-full text-[11px] font-medium transition-all ${
                       collectionId === col.id
-                        ? "bg-indigo-600 text-white shadow-md scale-105"
+                        ? "bg-indigo-600 text-white shadow-sm"
                         : "bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                     }`}
                   >
@@ -263,15 +263,15 @@ export default function AddLinkModal({
 
           {/* Tags */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Tags (séparés par des virgules)
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Tags (virgules)
             </label>
             <input
               type="text"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
               placeholder="drôle, cuisine, dev..."
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400"
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400"
             />
           </div>
 
@@ -279,7 +279,7 @@ export default function AddLinkModal({
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="w-full py-3.5 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none disabled:opacity-50"
+            className="w-full py-3 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none disabled:opacity-50"
           >
             {loading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
