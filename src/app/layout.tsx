@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "LinkBel - Sauvegardez vos liens",
   description: "Ne perdez plus jamais un lien. Sauvegardez, classez et retrouvez vos liens facilement.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
